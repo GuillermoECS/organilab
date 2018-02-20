@@ -6,9 +6,14 @@
 {% block content %}
   <div class="page-header"><h1>{% trans 'Laboratory report' %}</h1></div>
 
-  <div>
-  
-
+<div class="row">
+  <div class="col-md-7">
+    <canvas id="imdgchart" width="300" height="200"></canvas>
+  </div>
+  <div class="col-md-4 col-md-offset-1">
+  		<canvas id="typechart" width="300" height="200"></canvas>
+  </div>
+</div>
   <div class="btn-group dropup pull-right">
   <button type="button" class="btn btn-danger">  <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
   {% trans 'Download'%}</button>
@@ -102,3 +107,20 @@
   </div>
   <br><br>
 {% endblock %}
+
+{% block js %}       
+  <script type="text/javascript">
+            $.get('{% url "laboratory:laboratory_imdg_chart" laboratory %}', function(data) {
+                var ctx = $("#imdgchart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line', data: data
+                });
+            });
+            $.get('{% url "laboratory:laboratory_type_chart" laboratory %}', function(data) {
+                var ctx = $("#typechart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'bar', data: data
+                });
+            });            
+             
+        </script>  {% endblock %}

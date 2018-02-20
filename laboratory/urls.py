@@ -17,6 +17,7 @@ from laboratory.views import furniture, reports, shelfs, objectfeature
 from laboratory.views import labroom, shelfobject, laboratory, solutions
 from laboratory.views import access
 from laboratory.views.objects import ObjectView
+from laboratory.views import graphs
 
 objviews = ObjectView()
 
@@ -166,6 +167,11 @@ lab_access_urls = [
         name='access_list_students'),
 ]
 
+lab_chart_urls = [
+    url("^laboratory_imdg_chart$", graphs.LaboratoryIMDGChart.as_view(), name="laboratory_imdg_chart"),
+    url("^laboratory_type_chart$", graphs.LaboratoryTypeChart.as_view(), name="laboratory_type_chart"),
+]
+
 '''MULTILAB'''
 urlpatterns += [
     url(r"^lab/(?P<lab_pk>\d+)?/search$", SearchObject.as_view(), name="search"),
@@ -178,4 +184,5 @@ urlpatterns += [
     url(r'^lab/(?P<lab_pk>\d+)/features/', include(lab_features_urls)),
     url(r'^lab/(?P<lab_pk>\d+)/solutions/', include(solutions_urls)),
     url(r'^lab/(?P<lab_pk>\d+)/access/', include(lab_access_urls)),
+    url(r'^lab/(?P<lab_pk>\d+)/graphs/', include(lab_chart_urls)),
 ]

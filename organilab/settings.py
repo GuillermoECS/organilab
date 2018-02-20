@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ajax_select',
     'crispy_forms',
     'cruds_adminlte',
+    'chartjs',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

@@ -66,7 +66,7 @@ class BaseAccessListLab(FormView, ListView):
             for user in users:
                 self.add_user_to_relation(user, relation_field,
                                           self.group)
-            messages.info(self.request, "User added successfully")
+            messages.info(self.request, _("User added successfully"))
             return redirect(self.get_success_url())
 
         elif form.cleaned_data['action'] == 'createuser':
